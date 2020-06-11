@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Test app component <App errorCount={3} gameTime={7}/>} 1`] = `
+exports[`Test app component <App errorCount={3} gameTime={7} onWelcomeButtonClick={jest.fn()}/>} 1`] = `
 <section
   className="welcome"
 >
@@ -16,6 +16,7 @@ exports[`Test app component <App errorCount={3} gameTime={7}/>} 1`] = `
   </div>
   <button
     className="welcome__button"
+    onClick={[MockFunction]}
   >
     <span
       className="visually-hidden"
