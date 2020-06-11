@@ -9,11 +9,11 @@ const init = () => {
   };
 
   ReactDOM.render(
-    <App
-      errorCount={settings.errorCount}
-      gameTime={settings.gameTime}
-    />,
-    document.querySelector(`#root`)
+      <App
+        errorCount={settings.errorCount}
+        gameTime={settings.gameTime}
+      />,
+      document.querySelector(`#root`)
   );
 };
 
