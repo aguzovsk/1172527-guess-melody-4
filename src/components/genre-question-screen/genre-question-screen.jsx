@@ -1,51 +1,70 @@
 import React from 'react';
+import QuestionScreenHeader from '../question-screen-header/questioin-screen-header.jsx';
+import PropTypes from 'prop-types';
+import GameTrack from '../game-track/game-track.jsx';
+import {GameType} from '../../const.js';
 
-const questionScreenHeader = () => {
-  return <header className="game__header">
-    <a className="game__back" href="#">
-      <span className="visually-hidden">Сыграть ещё раз</span>
-      <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию" />
-    </a>
+class GenreQuestionScreen extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-    <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-      <circle className="timer__line" cx="390" cy="390" r="370"
-        style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`} } />
-    </svg>
+    this.state = {
+      answers: new Array(4).fill(false)
+    };
+  }
 
-    <div className="game__mistakes">
-      <div className="wrong"></div>
-      <div className="wrong"></div>
-      <div className="wrong"></div>
-    </div>
-  </header>;
-};
+  render() {
+    const {onAnswer, question} = this.props;
+    const {answers} = this.state;
+    const {options, genre} = question;
 
-const trackMarkup = (idx) => {
-  return <div key={`${idx}`} className="track">
-    <button className="track__button track__button--play" type="button"></button>
-    <div className="track__status">
-      <audio></audio>
-    </div>
-    <div className="game__answer">
-      <input className="game__input visually-hidden" type="checkbox" name="answer" value="answer-1" id={`answer-${idx}`} />
-      <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
-    </div>
-  </div>;
-};
+    return <section className="game game--genre">
+      <QuestionScreenHeader />
 
-const GenreQuestionScreen = () => {
-  return <section className="game game--genre">
-    {questionScreenHeader()}
+      <section className="game__screen">
+        <h2 className="game__title">Выберите {genre} треки</h2>
+        <form className="game__tracks"
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            onAnswer(question, this.state.answers);
+          }}
+        >
+          {options.map((option, idx) => <GameTrack key={idx} src={option.src}>
+            <div className="game__answer">
+              <input className="game__input visually-hidden"
+                type="checkbox" name="answer"
+                value={`answer-${idx}`}
+                id={`answer-${idx}`}
+                checked={answers[idx]}
+                onChange={(evt) => {
+                  const value = evt.target.checked;
 
-    <section className="game__screen">
-      <h2 className="game__title">Выберите инди-рок треки</h2>
-      <form className="game__tracks">
-        {new Array(4).fill(0).map((_, i) => trackMarkup(i))}
+                  this.setState({
+                    answers: [...answers.slice(0, idx), value, ...answers.slice(idx + 1)]
+                  });
+                }}
+              />
+              <label className="game__check" htmlFor={`answer-${idx}`}>Отметить</label>
+            </div>
+          </GameTrack>)}
 
-        <button className="game__submit button" type="submit">Ответить</button>
-      </form>
-    </section>
-  </section>;
+          <button className="game__submit button" type="submit">Ответить</button>
+        </form>
+      </section>
+    </section>;
+  }
+}
+
+GenreQuestionScreen.propTypes = {
+  onAnswer: PropTypes.func.isRequired,
+  question: PropTypes.shape({
+    options: PropTypes.arrayOf(PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      genre: PropTypes.string.isRequired,
+    })).isRequired,
+    genre: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
+  }).isRequired,
 };
 
 export default GenreQuestionScreen;
