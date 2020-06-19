@@ -77,7 +77,6 @@ class App extends React.PureComponent {
 App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
-  onWelcomeButtonClick: PropTypes.func.isRequired,
   questions: PropTypes.array.isRequired
 };
 
