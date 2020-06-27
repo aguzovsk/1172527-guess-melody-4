@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionScreenHeader from '../question-screen-header/questioin-screen-header.jsx';
+import GameScreen from '../game-screen/game-screen.jsx';
 import PropTypes from 'prop-types';
 import GameTrack from '../game-track/game-track.jsx';
 import {GameType} from '../../const.js';
@@ -19,7 +19,7 @@ class GenreQuestionScreen extends React.PureComponent {
     const {options, genre} = question;
 
     return <section className="game game--genre">
-      <QuestionScreenHeader />
+      <GameScreen />
 
       <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>

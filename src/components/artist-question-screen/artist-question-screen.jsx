@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QuestionScreenHeader from '../question-screen-header/questioin-screen-header.jsx';
+import GameScreen from '../game-screen/game-screen.jsx';
 import GameTrack from '../game-track/game-track.jsx';
 import {GameType} from '../../const.js';
 
@@ -9,7 +9,7 @@ const ArtistQuestionScreen = (props) => {
   const {options, song} = question;
 
   return <section className="game game--artist">
-    <QuestionScreenHeader/>
+    <GameScreen/>
 
     <section className="game__screen">
       <h2 className="game__title">Кто исполняет эту песню?</h2>

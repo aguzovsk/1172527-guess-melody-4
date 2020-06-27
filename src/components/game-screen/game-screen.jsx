@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuestionScreenHeader = () => {
+const GameScreen = () => {
   return <header className="game__header">
     <a className="game__back" href="#">
       <span className="visually-hidden">Сыграть ещё раз</span>
@@ -20,4 +20,4 @@ const QuestionScreenHeader = () => {
   </header>;
 };
 
-export default QuestionScreenHeader;
+export default GameScreen;
